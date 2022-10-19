@@ -12,6 +12,8 @@ import RxCocoa
 final class ViewModel {
     
     let calculatedNum: Observable<String>
+    let isComma: Observable<Bool>
+    let howToCalcChanged: Observable<howToCalc>
     
     private let model: CalculatorModel
     private let disposeBag = DisposeBag()
@@ -39,12 +41,31 @@ final class ViewModel {
         callHistoryTaps: Observable<Void>
     ) {
         let _displayNum = BehaviorRelay<String>(value: "0.0")
-        self.model = CalculatorModel(changed: { displayNum in _displayNum.accept(displayNum)})
+        let _isComma = BehaviorRelay<Bool>(value: false)
+        let _how = BehaviorRelay<howToCalc>(value: .none)
+        
+        self.model = CalculatorModel(
+            displayNumChanged: { displayNum in _displayNum.accept(displayNum)},
+            isCommaChanged: { isComma in _isComma.accept(isComma)},
+            howToCalcChanged: { how in _how.accept(how)}
+        )
         
         self.calculatedNum = _displayNum
             .flatMap({ [weak model] num -> Observable<String> in
                 guard let model = model else { return .empty()}
                 return .just(String(model.displayNum))
+            })
+        
+        self.isComma = _isComma
+            .flatMap({ [weak model] bool -> Observable<Bool> in
+                guard let model = model else { return .empty()}
+                return .just(model.isCommma)
+            })
+        
+        self.howToCalcChanged = _how
+            .flatMap({ [weak model] how -> Observable<howToCalc> in
+                guard let model = model else { return .empty()}
+                return .just(model.how)
             })
         
         plusTaps

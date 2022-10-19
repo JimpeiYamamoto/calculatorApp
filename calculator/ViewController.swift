@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var delete: UIButton!
     @IBOutlet weak var comma: UIButton!
     @IBOutlet weak var equal: UIButton!
+    
     @IBOutlet weak var plus: UIButton!
     @IBOutlet weak var minus: UIButton!
     @IBOutlet weak var multi: UIButton!
@@ -65,9 +66,32 @@ class ViewController: UIViewController {
         )
         
         viewModel.calculatedNum
-            .bind(to: numLabel.rx.calculatedNum)
-            .disposed(by: disposeBag)
+            .bind(to: self.numLabel.rx.calculatedNum)
+            .disposed(by: self.disposeBag)
         
+        viewModel.isComma
+            .bind(to: self.comma.rx.isComma)
+            .disposed(by: self.disposeBag)
+        
+        viewModel.howToCalcChanged
+            .bind(to: self.plus.rx.isPlus)
+            .disposed(by: self.disposeBag)
+        
+        viewModel.howToCalcChanged
+            .bind(to: self.minus.rx.isMinus)
+            .disposed(by: self.disposeBag)
+        
+        viewModel.howToCalcChanged
+            .bind(to: self.multi.rx.isMulti)
+            .disposed(by: self.disposeBag)
+        
+        viewModel.howToCalcChanged
+            .bind(to: self.div.rx.isDiv)
+            .disposed(by: self.disposeBag)
+        
+        viewModel.howToCalcChanged
+            .bind(to: self.mod.rx.isMod)
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -75,8 +99,62 @@ extension Reactive where Base: UILabel {
     
     var calculatedNum: Binder<String> {
         return Binder(base) { label, result  in
+            print("result: ", result)
             label.text = result.description
         }
     }
     
+}
+
+extension Reactive where Base: UIButton {
+    
+    var isComma: Binder<Bool> {
+        return Binder(base) { button, result in
+            button.setEmphasis(isEmphasis: result)
+        }
+    }
+    
+    var isPlus: Binder<howToCalc> {
+        return Binder(base) { button, result in
+            button.setEmphasis(isEmphasis: result == .plus)
+        }
+    }
+    
+    var isMinus: Binder<howToCalc> {
+        return Binder(base) { button, result in
+            button.setEmphasis(isEmphasis: result == .minus)
+        }
+    }
+    
+    var isMulti: Binder<howToCalc> {
+        return Binder(base) { button, result in
+            button.setEmphasis(isEmphasis: result == .multi)
+        }
+    }
+    
+    var isDiv: Binder<howToCalc> {
+        return Binder(base) { button, result in
+            button.setEmphasis(isEmphasis: result == .div)
+        }
+    }
+    
+    var isMod: Binder<howToCalc> {
+        return Binder(base) { button, result in
+            button.setEmphasis(isEmphasis: result == .mod)
+        }
+    }
+    
+}
+
+extension UIButton {
+    
+    func setEmphasis(isEmphasis: Bool) {
+        if isEmphasis {
+            self.layer.borderWidth = 5.0
+            self.layer.borderColor = UIColor.black.cgColor
+        } else {
+            self.layer.borderWidth = 0.0
+            self.layer.borderColor = UIColor.clear.cgColor
+        }
+    }
 }

@@ -9,28 +9,45 @@ import Foundation
 
 final class CalculatorModel {
     
-    private let changed: (String) -> ()
+    private let displayNumChanged: (String) -> ()
+    private let isCommandChanged: (Bool) -> ()
+    private let howToCalcChanged: (howToCalc) -> ()
     
     private(set) var displayNum: String = "0.0" {
         didSet {
-            changed(displayNum)
+            displayNumChanged(displayNum)
+        }
+    }
+    
+    private(set) var isCommma: Bool = false {
+        didSet {
+            isCommandChanged(isCommma)
+        }
+    }
+    
+    private(set) var how: howToCalc = .none {
+        didSet {
+            howToCalcChanged(how)
         }
     }
     
     private(set) var num1: Double = 0.0
     private(set) var num2: Double = 0.0
     
-    private(set) var how: howToCalc = .none
     private(set) var isChangedHow: Bool = false
     
-    private(set) var isCommma: Bool = false
-    
-    private(set) var results: [Double] = []
+    private(set) var results: [Double] = [0.0]
     
     private(set) var historyIndex = 0
     
-    init(changed: @escaping (String) -> ()) {
-        self.changed = changed
+    init(
+        displayNumChanged: @escaping (String) -> (),
+        isCommaChanged: @escaping (Bool) -> (),
+        howToCalcChanged: @escaping (howToCalc) -> ()
+    ) {
+        self.displayNumChanged = displayNumChanged
+        self.isCommandChanged = isCommaChanged
+        self.howToCalcChanged = howToCalcChanged
     }
     
     func tapNum(n: Double) {
