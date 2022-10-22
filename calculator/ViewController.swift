@@ -37,6 +37,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var call: UIButton!
     @IBOutlet weak var clear: UIButton!
     
+    @IBOutlet weak var tableView: UITableView!
+    
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -92,7 +94,16 @@ class ViewController: UIViewController {
         viewModel.howToCalcChanged
             .bind(to: self.mod.rx.isMod)
             .disposed(by: self.disposeBag)
+        
+        viewModel.results
+            .bind(to: self.tableView.rx.items(cellIdentifier: "Cell")) { row, element, cell in
+                cell.textLabel?.font = UIFont.systemFont(ofSize: 25)
+                cell.textLabel?.textAlignment = .right
+                cell.textLabel?.text = String(element)
+            }
+            .disposed(by: disposeBag)
     }
+    
 }
 
 extension Reactive where Base: UILabel {

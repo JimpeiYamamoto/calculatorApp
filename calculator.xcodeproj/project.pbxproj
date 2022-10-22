@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0756EAC04B162A4CE3E09F58 /* Pods_calculatorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77DEEB2051879852C410AFF /* Pods_calculatorTests.framework */; };
 		1C0B3CE71C02AFD6F3682BC9 /* Pods_calculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84C1947DC611A6C020FF6F /* Pods_calculator.framework */; };
+		7333F1922903E4DF00B34A03 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333F1912903E4DF00B34A03 /* ColorExtension.swift */; };
 		73C5131628F44ABD004D9181 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5131528F44ABD004D9181 /* AppDelegate.swift */; };
 		73C5131828F44ABD004D9181 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5131728F44ABD004D9181 /* SceneDelegate.swift */; };
 		73C5131A28F44ABD004D9181 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5131928F44ABD004D9181 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 		0B6D5372639A49077D4CC996 /* Pods-calculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator.release.xcconfig"; path = "Target Support Files/Pods-calculator/Pods-calculator.release.xcconfig"; sourceTree = "<group>"; };
 		41315239D80CB95F8D29D406 /* Pods-calculator-calculatorUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator-calculatorUITests.release.xcconfig"; path = "Target Support Files/Pods-calculator-calculatorUITests/Pods-calculator-calculatorUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5A55664D4E130E18CD09EFAB /* Pods-calculatorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculatorTests.release.xcconfig"; path = "Target Support Files/Pods-calculatorTests/Pods-calculatorTests.release.xcconfig"; sourceTree = "<group>"; };
+		7333F1912903E4DF00B34A03 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		73C5131228F44ABD004D9181 /* calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C5131528F44ABD004D9181 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73C5131728F44ABD004D9181 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				73C5131E28F44ABF004D9181 /* Assets.xcassets */,
 				73C5132028F44ABF004D9181 /* LaunchScreen.storyboard */,
 				73C5132328F44ABF004D9181 /* Info.plist */,
+				7333F1912903E4DF00B34A03 /* ColorExtension.swift */,
 			);
 			path = calculator;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				73C5134928F5B0CF004D9181 /* CalculatorModel.swift in Sources */,
 				73C5131A28F44ABD004D9181 /* ViewController.swift in Sources */,
 				73C5131628F44ABD004D9181 /* AppDelegate.swift in Sources */,
+				7333F1922903E4DF00B34A03 /* ColorExtension.swift in Sources */,
 				73C5134628F44DA5004D9181 /* ViewModel.swift in Sources */,
 				73C5131828F44ABD004D9181 /* SceneDelegate.swift in Sources */,
 			);

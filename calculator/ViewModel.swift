@@ -20,6 +20,7 @@ final class ViewModel {
     let calculatedNum: Observable<displayInfo>
     let isComma: Observable<Bool>
     let howToCalcChanged: Observable<howToCalc>
+    let results: Observable<[Double]>
     
     private let model: CalculatorModel
     private let disposeBag = DisposeBag()
@@ -54,11 +55,13 @@ final class ViewModel {
         )
         let _isComma = BehaviorRelay<Bool>(value: false)
         let _how = BehaviorRelay<howToCalc>(value: .none)
+        let _results = BehaviorRelay<[Double]>(value: [0.0])
         
         self.model = CalculatorModel(
             displayNumChanged: { displayNum in _displayCalcInfo.accept(displayNum)},
             isCommaChanged: { isComma in _isComma.accept(isComma)},
-            howToCalcChanged: { how in _how.accept(how)}
+            howToCalcChanged: { how in _how.accept(how)},
+            resultsChanged: { results in _results.accept(results)}
         )
         
         self.calculatedNum = _displayCalcInfo
@@ -81,6 +84,8 @@ final class ViewModel {
                     }
                 } else if info.isComma == false{
                     at = integerPart.count-1
+                } else {
+                    isUnder = true
                 }
                 return .just(displayInfo(
                     num: str,
@@ -96,6 +101,11 @@ final class ViewModel {
         self.howToCalcChanged = _how
             .flatMap({ how -> Observable<howToCalc> in
                 return .just(how)
+            })
+        
+        self.results = _results
+            .flatMap({ results -> Observable<[Double]> in
+                return .just(results)
             })
         
         plusTaps

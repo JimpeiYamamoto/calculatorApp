@@ -12,6 +12,8 @@ final class CalculatorModel {
     private let displayNumChanged: (displayCalcInfo) -> ()
     private let isCommandChanged: (Bool) -> ()
     private let howToCalcChanged: (howToCalc) -> ()
+    private let resultsChanged: ([Double]) -> ()
+    
     
     private(set) var displayInfo: displayCalcInfo = displayCalcInfo(
         displayNum: "0.0",
@@ -40,23 +42,29 @@ final class CalculatorModel {
         }
     }
     
+    private(set) var results: [Double] = [0.0] {
+        didSet {
+            self.resultsChanged(results)
+        }
+    }
+    
     private(set) var num1: Double = 0.0
     private(set) var num2: Double = 0.0
     
     private(set) var isChangedHow: Bool = false
-    
-    private(set) var results: [Double] = [0.0]
     
     private(set) var historyIndex = 0
     
     init(
         displayNumChanged: @escaping (displayCalcInfo) -> (),
         isCommaChanged: @escaping (Bool) -> (),
-        howToCalcChanged: @escaping (howToCalc) -> ()
+        howToCalcChanged: @escaping (howToCalc) -> (),
+        resultsChanged: @escaping ([Double]) -> ()
     ) {
         self.displayNumChanged = displayNumChanged
         self.isCommandChanged = isCommaChanged
         self.howToCalcChanged = howToCalcChanged
+        self.resultsChanged = resultsChanged
     }
     
     func tapNum(n: Double) {
