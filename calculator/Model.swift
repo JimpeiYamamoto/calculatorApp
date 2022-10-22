@@ -126,14 +126,18 @@ final class CalculatorModel {
         var integerPart = String(self.displayNum.split(separator: ".")[0])
         var dicimalPart = String(self.displayNum.split(separator: ".")[1])
         
-        if dicimalPart.count != 1 {
-            dicimalPart = String(dicimalPart.dropLast())
-        } else if dicimalPart.count == 1 && dicimalPart.last != "0" {
-            dicimalPart = "0"
-        } else if integerPart.count != 1{
-            integerPart = String(integerPart.dropLast())
-        } else if integerPart.count == 1 {
-            integerPart = "0"
+        if self.isCommma {
+            if dicimalPart.count != 1 {
+                dicimalPart = String(dicimalPart.dropLast())
+            } else if dicimalPart.count == 1 && dicimalPart.last != "0" {
+                dicimalPart = "0"
+            }
+        } else {
+            if integerPart.count != 1 {
+                integerPart = String(integerPart.dropLast())
+            } else if integerPart.count == 1 && integerPart.last != "0" {
+                integerPart = "0"
+            }
         }
         self.displayNum = String(integerPart + "." + dicimalPart)
         

@@ -99,7 +99,6 @@ extension Reactive where Base: UILabel {
     
     var calculatedNum: Binder<String> {
         return Binder(base) { label, result  in
-            print("result: ", result)
             label.text = result.description
         }
     }
