@@ -19,7 +19,7 @@
 		73C5133728F44AC0004D9181 /* calculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5133628F44AC0004D9181 /* calculatorUITests.swift */; };
 		73C5133928F44AC0004D9181 /* calculatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5133828F44AC0004D9181 /* calculatorUITestsLaunchTests.swift */; };
 		73C5134628F44DA5004D9181 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5134528F44DA5004D9181 /* ViewModel.swift */; };
-		73C5134928F5B0CF004D9181 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5134828F5B0CF004D9181 /* Model.swift */; };
+		73C5134928F5B0CF004D9181 /* CalculatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C5134828F5B0CF004D9181 /* CalculatorModel.swift */; };
 		7AB9F91D470C78DD49DEAA4B /* Pods_calculator_calculatorUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECD17F81E4F727595476B31 /* Pods_calculator_calculatorUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +58,7 @@
 		73C5133628F44AC0004D9181 /* calculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculatorUITests.swift; sourceTree = "<group>"; };
 		73C5133828F44AC0004D9181 /* calculatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		73C5134528F44DA5004D9181 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		73C5134828F5B0CF004D9181 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		73C5134828F5B0CF004D9181 /* CalculatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorModel.swift; sourceTree = "<group>"; };
 		8285C48D9EECBBDEEA586C76 /* Pods-calculatorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculatorTests.debug.xcconfig"; path = "Target Support Files/Pods-calculatorTests/Pods-calculatorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E84C1947DC611A6C020FF6F /* Pods_calculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77DEEB2051879852C410AFF /* Pods_calculatorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calculatorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,7 +135,7 @@
 			children = (
 				73C5131528F44ABD004D9181 /* AppDelegate.swift */,
 				73C5131728F44ABD004D9181 /* SceneDelegate.swift */,
-				73C5134828F5B0CF004D9181 /* Model.swift */,
+				73C5134828F5B0CF004D9181 /* CalculatorModel.swift */,
 				73C5134528F44DA5004D9181 /* ViewModel.swift */,
 				73C5131928F44ABD004D9181 /* ViewController.swift */,
 				73C5131B28F44ABD004D9181 /* Main.storyboard */,
@@ -430,7 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73C5134928F5B0CF004D9181 /* Model.swift in Sources */,
+				73C5134928F5B0CF004D9181 /* CalculatorModel.swift in Sources */,
 				73C5131A28F44ABD004D9181 /* ViewController.swift in Sources */,
 				73C5131628F44ABD004D9181 /* AppDelegate.swift in Sources */,
 				73C5134628F44DA5004D9181 /* ViewModel.swift in Sources */,

@@ -97,9 +97,17 @@ class ViewController: UIViewController {
 
 extension Reactive where Base: UILabel {
     
-    var calculatedNum: Binder<String> {
+    var calculatedNum: Binder<displayInfo> {
         return Binder(base) { label, result  in
-            label.text = result.description
+            label.text = result.num
+            label.textColor = .white
+            if result.isUnder {
+                let text = NSMutableAttributedString(string: result.num)
+                text.addAttributes([
+                    .foregroundColor: UIColor.red
+                ],range: NSMakeRange(result.atUnderline, 1))
+                label.attributedText = text
+            }
         }
     }
     

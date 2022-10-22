@@ -9,9 +9,15 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+struct displayInfo {
+    var num: String
+    var isUnder: Bool
+    var atUnderline: Int
+}
+
 final class ViewModel {
     
-    let calculatedNum: Observable<String>
+    let calculatedNum: Observable<displayInfo>
     let isComma: Observable<Bool>
     let howToCalcChanged: Observable<howToCalc>
     
@@ -40,32 +46,56 @@ final class ViewModel {
         clearTaps: Observable<Void>,
         callHistoryTaps: Observable<Void>
     ) {
-        let _displayNum = BehaviorRelay<String>(value: "0.0")
+        let _displayCalcInfo = BehaviorRelay<displayCalcInfo>(
+            value: displayCalcInfo(
+                displayNum: "0.0",
+                isComma: false
+            )
+        )
         let _isComma = BehaviorRelay<Bool>(value: false)
         let _how = BehaviorRelay<howToCalc>(value: .none)
         
         self.model = CalculatorModel(
-            displayNumChanged: { displayNum in _displayNum.accept(displayNum)},
+            displayNumChanged: { displayNum in _displayCalcInfo.accept(displayNum)},
             isCommaChanged: { isComma in _isComma.accept(isComma)},
             howToCalcChanged: { how in _how.accept(how)}
         )
         
-        self.calculatedNum = _displayNum
-            .flatMap({ [weak model] num -> Observable<String> in
-                guard let model = model else { return .empty()}
-                return .just(String(model.displayNum))
+        self.calculatedNum = _displayCalcInfo
+            .flatMap({info -> Observable<displayInfo> in
+                
+                var str: String = info.displayNum
+                var at: Int = str.count-1
+                var isUnder: Bool = true
+                
+                let integerPart = String(info.displayNum.split(separator: ".")[0])
+                let dicimalPart = String(info.displayNum.split(separator: ".")[1])
+                if dicimalPart.count == 1 && dicimalPart == "0" {
+                    if info.isComma {
+                        str = integerPart + "."
+                        at = integerPart.count-1+1
+                    } else {
+                        str = integerPart
+                        at = integerPart.count-1
+                        isUnder = false
+                    }
+                } else if info.isComma == false{
+                    at = integerPart.count-1
+                }
+                return .just(displayInfo(
+                    num: str,
+                    isUnder: isUnder,
+                    atUnderline: at))
             })
         
         self.isComma = _isComma
-            .flatMap({ [weak model] bool -> Observable<Bool> in
-                guard let model = model else { return .empty()}
-                return .just(model.isCommma)
+            .flatMap({ bool -> Observable<Bool> in
+                return .just(bool)
             })
         
         self.howToCalcChanged = _how
-            .flatMap({ [weak model] how -> Observable<howToCalc> in
-                guard let model = model else { return .empty()}
-                return .just(model.how)
+            .flatMap({ how -> Observable<howToCalc> in
+                return .just(how)
             })
         
         plusTaps

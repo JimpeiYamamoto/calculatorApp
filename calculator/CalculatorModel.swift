@@ -9,25 +9,34 @@ import Foundation
 
 final class CalculatorModel {
     
-    private let displayNumChanged: (String) -> ()
+    private let displayNumChanged: (displayCalcInfo) -> ()
     private let isCommandChanged: (Bool) -> ()
     private let howToCalcChanged: (howToCalc) -> ()
     
-    private(set) var displayNum: String = "0.0" {
+    private(set) var displayInfo: displayCalcInfo = displayCalcInfo(
+        displayNum: "0.0",
+        isComma: false) {
         didSet {
-            displayNumChanged(displayNum)
+            displayNumChanged(displayInfo)
+        }
+    }
+    
+    private(set) var displayNum : String = "0.0"{
+        didSet {
+            self.displayInfo.displayNum = displayNum
         }
     }
     
     private(set) var isCommma: Bool = false {
         didSet {
-            isCommandChanged(isCommma)
+            self.isCommandChanged(isCommma)
+            self.displayInfo.isComma = isCommma
         }
     }
     
     private(set) var how: howToCalc = .none {
         didSet {
-            howToCalcChanged(how)
+            self.howToCalcChanged(how)
         }
     }
     
@@ -41,7 +50,7 @@ final class CalculatorModel {
     private(set) var historyIndex = 0
     
     init(
-        displayNumChanged: @escaping (String) -> (),
+        displayNumChanged: @escaping (displayCalcInfo) -> (),
         isCommaChanged: @escaping (Bool) -> (),
         howToCalcChanged: @escaping (howToCalc) -> ()
     ) {
@@ -107,7 +116,9 @@ final class CalculatorModel {
         case .multi:
             result = self.num1 * self.num2
         case .div:
-            result = self.num1 / self.num2
+            if self.num2 != 0 {
+                result = self.num1 / self.num2
+            }
         case .mod:
             result = Double(Int(self.num1) % Int(self.num2))
         case .none:
@@ -182,3 +193,9 @@ enum howToCalc {
     case mod
     case none
 }
+
+struct displayCalcInfo {
+    var displayNum : String
+    var isComma: Bool
+}
+
