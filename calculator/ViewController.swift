@@ -3,7 +3,7 @@
 //  calculator
 //
 //  Created by 水代謝システム工学研究室 on 2022/10/10.
-//
+// https://colorhunt.co/palette/4834346b4f4feed6c4fff3e4
 
 import UIKit
 import RxSwift
@@ -41,8 +41,33 @@ class ViewController: UIViewController {
     
     var disposeBag = DisposeBag()
     
+    
+    func setColor(uiItems: [UIButton], hex: String) {
+        for item in uiItems {
+            item.backgroundColor = UIColor.init(hex: hex)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setColor(
+            uiItems: [
+                zero, one, two, three, four, five, six, seven, eight, nine, comma
+            ],
+            hex: "6B4F4F"
+        )
+        
+        setColor(
+            uiItems: [
+                delete, clear, mod, div, multi, minus, plus, equal, call
+            ],
+            hex: "483434"
+        )
+        numLabel.backgroundColor = UIColor.init(hex: "483434")
+        tableView.backgroundColor = UIColor.init(hex: "483434")
+        self.view.backgroundColor = UIColor.init(hex: "EED6C4")
+        
         
         let viewModel = ViewModel(
             zeroTaps: zero.rx.tap.asObservable(),
@@ -97,7 +122,9 @@ class ViewController: UIViewController {
         
         viewModel.results
             .bind(to: self.tableView.rx.items(cellIdentifier: "Cell")) { row, element, cell in
+                cell.selectionStyle = .none
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 25)
+                cell.backgroundColor = UIColor.init(hex: "483434")
                 cell.textLabel?.textAlignment = .right
                 cell.textLabel?.text = String(element)
             }
@@ -115,7 +142,7 @@ extension Reactive where Base: UILabel {
             if result.isUnder {
                 let text = NSMutableAttributedString(string: result.num)
                 text.addAttributes([
-                    .foregroundColor: UIColor.red
+                    .foregroundColor: UIColor.init(hex: "EED6C4")
                 ],range: NSMakeRange(result.atUnderline, 1))
                 label.attributedText = text
             }
@@ -158,7 +185,7 @@ extension Reactive where Base: UIButton {
     
     var isMod: Binder<howToCalc> {
         return Binder(base) { button, result in
-            button.setEmphasis(isEmphasis: result == .mod)
+            button.setEmphasis(isEmphasis: result == .pow)
         }
     }
     
@@ -169,7 +196,7 @@ extension UIButton {
     func setEmphasis(isEmphasis: Bool) {
         if isEmphasis {
             self.layer.borderWidth = 5.0
-            self.layer.borderColor = UIColor.black.cgColor
+            self.layer.borderColor = UIColor.init(hex: "FFF3E4").cgColor
         } else {
             self.layer.borderWidth = 0.0
             self.layer.borderColor = UIColor.clear.cgColor

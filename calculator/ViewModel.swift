@@ -134,7 +134,7 @@ final class ViewModel {
         
         modTaps
             .subscribe(onNext: {[self] in
-                self.model.tapHowToCalc(how: .mod)
+                self.model.tapHowToCalc(how: .pow)
             })
             .disposed(by: disposeBag)
         

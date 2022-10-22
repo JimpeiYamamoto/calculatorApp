@@ -127,18 +127,30 @@ final class CalculatorModel {
             if self.num2 != 0 {
                 result = self.num1 / self.num2
             }
-        case .mod:
-            result = Double(Int(self.num1) % Int(self.num2))
+        case .pow:
+            result = pow(self.num1, self.num2)
         case .none:
             return
         }
         
-        self.results.append(result)
+        setResults(new: result)
         self.displayNum = String(result)
         self.how = .none
         self.num1 = result
         self.num2 = 0.0
         self.historyIndex = 0
+    }
+    
+    func setResults(new: Double) {
+        var ret = self.results
+        
+        if ret.contains(new) == false {
+            ret.append(new)
+        }
+        if ret.count == 5 {
+            _ = ret.remove(at: 0)
+        }
+        self.results = ret
     }
     
     func tapDelete() {
@@ -183,8 +195,14 @@ final class CalculatorModel {
             return
         }
         if self.how == .none {
+            if self.num1 == results[cnt-self.historyIndex-1] {
+                self.historyIndex = (self.historyIndex + 1) % cnt
+            }
             self.num1 = results[cnt-self.historyIndex-1]
         } else {
+            if self.num2 == results[cnt-self.historyIndex-1] {
+                self.historyIndex = (self.historyIndex + 1) % cnt
+            }
             self.num2 = results[cnt-self.historyIndex-1]
         }
         self.displayNum = String(self.results[cnt-historyIndex-1])
@@ -198,7 +216,7 @@ enum howToCalc {
     case minus
     case multi
     case div
-    case mod
+    case pow
     case none
 }
 
