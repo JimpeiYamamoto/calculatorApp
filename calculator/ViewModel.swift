@@ -9,13 +9,38 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-struct displayInfo {
-    var num: String
-    var isUnder: Bool
-    var atUnderline: Int
+protocol ViewModelType {
+    
+    var calculatedNum: Observable<displayInfo> { get }
+    var isComma: Observable<Bool> { get }
+    var howToCalcChanged: Observable<howToCalc> { get }
+    var results: Observable<[Double]> { get }
+    
+    init(
+        zeroTaps: Observable<Void>,
+        oneTaps: Observable<Void>,
+        twoTaps: Observable<Void>,
+        threeTaps: Observable<Void>,
+        fourTaps: Observable<Void>,
+        fiveTaps: Observable<Void>,
+        sixTaps: Observable<Void>,
+        sevenTaps: Observable<Void>,
+        eightTaps: Observable<Void>,
+        nineTaps: Observable<Void>,
+        equalTaps: Observable<Void>,
+        plusTaps: Observable<Void>,
+        minusTaps: Observable<Void>,
+        multiTaps: Observable<Void>,
+        divTaps: Observable<Void>,
+        modTaps: Observable<Void>,
+        commaTaps: Observable<Void>,
+        deleteTaps: Observable<Void>,
+        clearTaps: Observable<Void>,
+        callHistoryTaps: Observable<Void>
+    )
 }
 
-final class ViewModel {
+final class ViewModel: ViewModelType {
     
     let calculatedNum: Observable<displayInfo>
     let isComma: Observable<Bool>

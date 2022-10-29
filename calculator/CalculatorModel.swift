@@ -7,6 +7,26 @@
 
 import Foundation
 
+enum howToCalc {
+    case plus
+    case minus
+    case multi
+    case div
+    case pow
+    case none
+}
+
+struct displayCalcInfo {
+    var displayNum : String
+    var isComma: Bool
+}
+
+struct displayInfo {
+    var num: String
+    var isUnder: Bool
+    var atUnderline: Int
+}
+
 final class CalculatorModel {
     
     private let displayNumChanged: (displayCalcInfo) -> ()
@@ -210,18 +230,3 @@ final class CalculatorModel {
     }
     
 }
-
-enum howToCalc {
-    case plus
-    case minus
-    case multi
-    case div
-    case pow
-    case none
-}
-
-struct displayCalcInfo {
-    var displayNum : String
-    var isComma: Bool
-}
-

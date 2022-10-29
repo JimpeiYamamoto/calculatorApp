@@ -68,8 +68,7 @@ class ViewController: UIViewController {
         tableView.backgroundColor = UIColor.init(hex: "483434")
         self.view.backgroundColor = UIColor.init(hex: "EED6C4")
         
-        
-        let viewModel = ViewModel(
+        let viewModel: ViewModelType = ViewModel(
             zeroTaps: zero.rx.tap.asObservable(),
             oneTaps: one.rx.tap.asObservable(),
             twoTaps: two.rx.tap.asObservable(),
