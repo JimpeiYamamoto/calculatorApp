@@ -95,7 +95,6 @@ final class ViewModel: ViewModelType {
                 var str: String = info.displayNum
                 var at: Int = str.count-1
                 var isUnder: Bool = true
-                
                 let integerPart = String(info.displayNum.split(separator: ".")[0])
                 let dicimalPart = String(info.displayNum.split(separator: ".")[1])
                 if dicimalPart.count == 1 && dicimalPart == "0" {

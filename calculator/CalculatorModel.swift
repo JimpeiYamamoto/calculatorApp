@@ -152,7 +152,9 @@ final class CalculatorModel {
         case .none:
             return
         }
-        
+        if result.isInfinite {
+            result = 0.0
+        }
         setResults(new: result)
         self.displayNum = String(result)
         self.how = .none
