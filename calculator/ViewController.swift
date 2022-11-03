@@ -50,7 +50,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setColor(
             uiItems: [
                 zero, one, two, three, four, five, six, seven, eight, nine, comma
